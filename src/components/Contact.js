@@ -6,20 +6,25 @@ import { faSortDown } from '@fortawesome/free-solid-svg-icons';
 // import './contact.css';
 
 class Contact extends Component {
-  onShowClick = (e, name) => {
-    console.log(e.currentTarget);
-    console.log(name);
+  state = {
+    showContactInfo: false
+  };
+
+  onShowClick = () => {
+    this.setState({ showContactInfo: !this.state.showContactInfo });
   };
 
   render() {
     const { name, email, phone } = this.props.contact;
+    let showDetails = (<ul className='listgroup'>
+      <li className='list-group-item'>Email : {email}</li>
+      <li className='list-group-item'>Phone : {phone}</li>
+    </ul>);
+    showDetails = !this.state.showContactInfo ? null : showDetails;
     return (
       <div className='card card-body mb-3'>
-        <h4>{name} <i onClick={(e, arg = name) => this.onShowClick(e, arg)}><FontAwesomeIcon icon={faSortDown} /></i></h4>
-        <ul className='listgroup'>
-          <li className='list-group-item'>Email : {email}</li>
-          <li className='list-group-item'>Phone : {phone}</li>
-        </ul>
+        <h4>{name} <i onClick={this.onShowClick}><FontAwesomeIcon icon={faSortDown} /></i></h4>
+        {showDetails}
       </div>
     )
   }

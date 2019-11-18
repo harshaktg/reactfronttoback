@@ -31,11 +31,14 @@ class Contacts extends Component {
   render() {
     const { contacts } = this.state;
     return (
+      // you can use fragements instead of div if you dont want to use div to render
+      // <React.Fragment>
       <div>
         {contacts.map(contact => {
           return <Contact key={contact.id} contact={contact} />
         })}
       </div>
+      // </React.Fragment>
     )
   };
 };
