@@ -7,7 +7,8 @@ class AddContact extends Component {
   state = {
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    errors: {}
   };
 
   onChange = (e) => {
@@ -17,17 +18,34 @@ class AddContact extends Component {
   onSubmit = (e, dispatch) => {
     e.preventDefault();
     const newState = { ...this.state, id: uuid.v4() };
+
+    // check for errors
+    if (newState.name === '') {
+      this.setState({ errors: { name: 'Name is required' } });
+      return;
+    }
+
+    if (newState.email === '') {
+      this.setState({ errors: { email: 'Email is required' } });
+      return;
+    }
+
+    if (newState.phone === '') {
+      this.setState({ errors: { phone: 'Phone is required' } });
+      return;
+    }
     dispatch({ type: 'ADD_CONTACT', payload: newState });
     // to clear state
     this.setState({
       name: '',
       email: '',
-      phone: ''
+      phone: '',
+      errors: {}
     })
   };
 
   render() {
-    const { name, email, phone } = this.state;
+    const { name, email, phone, errors } = this.state;
 
     return (
       <Consumer>
@@ -39,9 +57,9 @@ class AddContact extends Component {
               </div>
               <div className="card-body">
                 <form onSubmit={(e) => this.onSubmit(e, value.dispatch)}>
-                  <TextInputGroup name='name' label='Name' placeholder='Enter name' value={name} onChange={this.onChange} />
-                  <TextInputGroup name='email' label='Email' type='email' placeholder='Enter email' value={email} onChange={this.onChange} />
-                  <TextInputGroup name='phone' label='Phone' placeholder='Enter phone' value={phone} onChange={this.onChange} />
+                  <TextInputGroup name='name' label='Name' placeholder='Enter name' value={name} onChange={this.onChange} error={errors.name} />
+                  <TextInputGroup name='email' label='Email' type='email' placeholder='Enter email' value={email} onChange={this.onChange} error={errors.email} />
+                  <TextInputGroup name='phone' label='Phone' placeholder='Enter phone' value={phone} onChange={this.onChange} error={errors.phone} />
                   <input type="submit" value="Add Contact" className="btn btn-block btn-light" />
                 </form>
               </div>
