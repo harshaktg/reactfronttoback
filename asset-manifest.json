@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/reactfronttoback/static/css/main.36497136.chunk.css",
+    "main.js": "/reactfronttoback/static/js/main.2f15ccdd.chunk.js",
+    "main.js.map": "/reactfronttoback/static/js/main.2f15ccdd.chunk.js.map",
+    "runtime-main.js": "/reactfronttoback/static/js/runtime-main.609377fb.js",
+    "runtime-main.js.map": "/reactfronttoback/static/js/runtime-main.609377fb.js.map",
+    "static/css/2.b0bb7f2c.chunk.css": "/reactfronttoback/static/css/2.b0bb7f2c.chunk.css",
+    "static/js/2.85b04485.chunk.js": "/reactfronttoback/static/js/2.85b04485.chunk.js",
+    "static/js/2.85b04485.chunk.js.map": "/reactfronttoback/static/js/2.85b04485.chunk.js.map",
+    "index.html": "/reactfronttoback/index.html",
+    "precache-manifest.64ec967d339b2c92cc2f9ef30a375c48.js": "/reactfronttoback/precache-manifest.64ec967d339b2c92cc2f9ef30a375c48.js",
+    "service-worker.js": "/reactfronttoback/service-worker.js",
+    "static/css/2.b0bb7f2c.chunk.css.map": "/reactfronttoback/static/css/2.b0bb7f2c.chunk.css.map",
+    "static/css/main.36497136.chunk.css.map": "/reactfronttoback/static/css/main.36497136.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.609377fb.js",
+    "static/css/2.b0bb7f2c.chunk.css",
+    "static/js/2.85b04485.chunk.js",
+    "static/css/main.36497136.chunk.css",
+    "static/js/main.2f15ccdd.chunk.js"
+  ]
+}
