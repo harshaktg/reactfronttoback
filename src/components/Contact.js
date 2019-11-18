@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Consumer } from '../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortDown, faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,23 +15,30 @@ class Contact extends Component {
     this.setState({ showContactInfo: !this.state.showContactInfo });
   };
 
-  onDeleteClick = () => {
-    this.props.deleteClickHandler();
+  onDeleteClick = (payload, dispatch) => {
+    dispatch({ type: 'DELETE_CONTACT', payload });
   };
 
   render() {
-    const { name, email, phone } = this.props.contact;
+    const { id, name, email, phone } = this.props.contact;
     let showDetails = (<ul className='listgroup'>
       <li className='list-group-item'>Email : {email}</li>
       <li className='list-group-item'>Phone : {phone}</li>
     </ul>);
     showDetails = !this.state.showContactInfo ? null : showDetails;
+
     return (
-      <div className='card card-body mb-3'>
-        <h4>{name} <i style={{ cursor: 'pointer' }} onClick={this.onShowClick}><FontAwesomeIcon icon={faSortDown} /></i>
-          <i style={{ cursor: 'pointer', color: 'red', float: 'right' }} onClick={this.onDeleteClick}><FontAwesomeIcon icon={faTimes} /></i></h4>
-        {showDetails}
-      </div>
+      <Consumer>
+        {value => {
+          return (
+            <div className='card card-body mb-3'>
+              <h4>{name} <i style={{ cursor: 'pointer' }} onClick={this.onShowClick}><FontAwesomeIcon icon={faSortDown} /></i>
+                <i style={{ cursor: 'pointer', color: 'red', float: 'right' }} onClick={(e, payload = id, action = value.dispatch) => this.onDeleteClick(payload, action)}><FontAwesomeIcon icon={faTimes} /></i></h4>
+              {showDetails}
+            </div>
+          );
+        }}
+      </Consumer>
     )
   }
 }
@@ -44,8 +52,7 @@ Contact.defaultProps = {
 Contact.propTypes = {
   name: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  deleteClickHandler: PropTypes.func.isRequired
+  email: PropTypes.string.isRequired
 };
 
 export default Contact;
