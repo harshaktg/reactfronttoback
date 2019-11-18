@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Consumer } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortDown, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -16,7 +17,8 @@ class Contact extends Component {
   };
 
   onDeleteClick = (payload, dispatch) => {
-    dispatch({ type: 'DELETE_CONTACT', payload });
+    axios.delete(`http://jsonplaceholder.typicode.com/users/${payload}`)
+      .then(response => dispatch({ type: 'DELETE_CONTACT', payload }));
   };
 
   render() {
