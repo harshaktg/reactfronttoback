@@ -7,6 +7,15 @@ class AddContact extends Component {
     phone: ''
   };
 
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+  };
+
   render() {
     const { name, email, phone } = this.state;
     return (
@@ -15,18 +24,18 @@ class AddContact extends Component {
           Add Contact
         </div>
         <div className="card-body">
-          <form>
+          <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label htmlFor="name">Name</label>
-              <input type="text" className="form-control form-control-lg" placeholder="Enter name" name="name" value={name} />
+              <input type="text" className="form-control form-control-lg" placeholder="Enter name" name="name" value={name} onChange={this.onChange} />
             </div>
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <input type="email" className="form-control form-control-lg" placeholder="Enter email" name="email" value={email} />
+              <input type="email" className="form-control form-control-lg" placeholder="Enter email" name="email" value={email} onChange={this.onChange} />
             </div>
             <div className="form-group">
               <label htmlFor="phone">Phone</label>
-              <input type="text" className="form-control form-control-lg" placeholder="Enter phone" name="phone" value={phone} />
+              <input type="text" className="form-control form-control-lg" placeholder="Enter phone" name="phone" value={phone} onChange={this.onChange} />
             </div>
             <input type="submit" value="Add Contact" className="btn btn-block btn-light" />
           </form>
