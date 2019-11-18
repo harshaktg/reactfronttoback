@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSortDown } from '@fortawesome/free-solid-svg-icons';
+import { faSortDown, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // import './contact.css';
 
@@ -14,6 +14,10 @@ class Contact extends Component {
     this.setState({ showContactInfo: !this.state.showContactInfo });
   };
 
+  onDeleteClick = () => {
+    this.props.deleteClickHandler();
+  };
+
   render() {
     const { name, email, phone } = this.props.contact;
     let showDetails = (<ul className='listgroup'>
@@ -23,7 +27,8 @@ class Contact extends Component {
     showDetails = !this.state.showContactInfo ? null : showDetails;
     return (
       <div className='card card-body mb-3'>
-        <h4>{name} <i onClick={this.onShowClick}><FontAwesomeIcon icon={faSortDown} /></i></h4>
+        <h4>{name} <i style={{ cursor: 'pointer' }} onClick={this.onShowClick}><FontAwesomeIcon icon={faSortDown} /></i>
+          <i style={{ cursor: 'pointer', color: 'red', float: 'right' }} onClick={this.onDeleteClick}><FontAwesomeIcon icon={faTimes} /></i></h4>
         {showDetails}
       </div>
     )
@@ -39,7 +44,8 @@ Contact.defaultProps = {
 Contact.propTypes = {
   name: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired
+  email: PropTypes.string.isRequired,
+  deleteClickHandler: PropTypes.func.isRequired
 };
 
 export default Contact;
