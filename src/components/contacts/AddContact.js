@@ -15,7 +15,7 @@ class AddContact extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = (e, dispatch) => {
+  onSubmit = async (e, dispatch) => {
     e.preventDefault();
     const newState = { ...this.state };
 
@@ -35,8 +35,8 @@ class AddContact extends Component {
       return;
     }
 
-    axios.post(`http://jsonplaceholder.typicode.com/users`, newState)
-      .then(response => dispatch({ type: 'ADD_CONTACT', payload: response.data }));
+    const response = await axios.post(`http://jsonplaceholder.typicode.com/users`, newState);
+    dispatch({ type: 'ADD_CONTACT', payload: response.data });
 
     // to clear state
     this.setState({
